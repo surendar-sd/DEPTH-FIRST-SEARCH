@@ -102,6 +102,60 @@ G F <BR>
 <h3>Sample Output</h3>
 <hr>
 ['0', '1', '2', '3', '4']
+
+PROGRAM:
+```
+from collections import deque
+from collections import defaultdict
+'''
+Input format:
+V E
+U V for each edge
+Example:
+7 9
+A B
+A C
+A F
+C E
+C F
+C D
+D E
+D G
+G F
+'''
+def bfs(graph, start, visited, path):
+    queue = deque()
+    path.append(start)
+    queue.append(start)
+    visited[start] = True
+    while len(queue) != 0:
+        tmpnode = queue.popleft()
+        # Visit all unvisited neighbors
+        for neighbour in graph[tmpnode]:
+            if not visited[neighbour]:
+                visited[neighbour] = True
+                queue.append(neighbour)
+                path.append(neighbour)
+    return path
+print("enter vertices and edges")
+graph = defaultdict(list)
+v, e = map(int, input().split())
+print("enter edges u v")
+for i in range(e):
+    u, v = input().split()
+    graph[u].append(v)
+    graph[v].append(u)  # assuming undirected graph
+start = input("Enter start node: ")
+path = []
+visited = defaultdict(bool)
+traversedpath = bfs(graph, start, visited, path)
+print("BFS Traversal Path:", traversedpath)
+```
+OUTPUT:
+
+<img width="751" height="324" alt="image" src="https://github.com/user-attachments/assets/b6e3f308-b394-4862-974e-a663b0ed3592" />
+
+
 <hr>
 <h3>Result:</h3>
 <hr>
